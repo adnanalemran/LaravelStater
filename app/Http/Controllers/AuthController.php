@@ -69,8 +69,10 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
+
         try {
             $data['password'] = Hash::make($data['password']);
+
             // Create new user
             $user = new User();
             $user->name = $data['name'];
@@ -85,7 +87,7 @@ class AuthController extends Controller
             return response()->json([
                 'user' => $user,
                 'token' => $token,
-            ]);
+            ], 201); // Change the status code to 201
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'User registration failed!',
@@ -93,12 +95,13 @@ class AuthController extends Controller
             ], 409);
         }
     }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Successfully logged out'], 200);
     }
-
+    
 
     public function updateUser(Request $request)
     {

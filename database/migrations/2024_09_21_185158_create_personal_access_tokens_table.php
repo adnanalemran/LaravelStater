@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-       if (!Schema::hasTable('personal_access_tokens')) {
+        if (!Schema::hasTable('personal_access_tokens')) {
             Schema::create('personal_access_tokens', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('tokenable_id')->constrained();
+                // Specify the referenced table and its column explicitly
+                $table->foreignId('tokenable_id')->constrained('users')->onDelete('cascade');
                 $table->string('tokenable_type')->index();
                 $table->string('name');
                 $table->text('token');
