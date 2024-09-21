@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function showUserInfo(Request $request)
+    {
+        return response()->json($request->user(), 200);
+    }
     public function getUser($id)
     {
         $user = User::find($id);

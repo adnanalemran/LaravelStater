@@ -18,6 +18,7 @@ Route::prefix('v1')->group(function () {
             Route::post('/logout', [AuthController::class, 'logout']);
             Route::post('/update', [AuthController::class, 'updateUser']);
             Route::post('/changePassword', [AuthController::class, 'changePassword']);
+            Route::get('/showUserInfo', [AuthController::class, 'showUserInfo']);
             Route::get('/getUser/{id}', [AuthController::class, 'getUser']);
             Route::get('/getAllUsers', [AuthController::class, 'getAllUsers']);
         });
